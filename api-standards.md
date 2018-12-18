@@ -57,8 +57,8 @@ ______________________________________________________________________________
 * [1. Getting Started: Building an API](#1) 
   * [1.1 Building APIs in Government](#1-1) 
   * [1.2 API as a Product](#1-2) 
-  * [1.3 Privacy and Security](#1-3) 
-  * [1.4 Strategic Design Checklist](#1-4) 
+  * [1.3 Applying the standard](#1-3) 
+  * [1.4 Privacy and Security](#1-4) 
   * [1.5 Sample Swagger Definition](#1-5) 
   * [1.6 The choice behind REST](#1-6) 
 * [2. Interpreting These Guidelines](#2) 
@@ -152,8 +152,7 @@ ______________________________________________________________________________
   * [13.1 Current Guidance](#13-1) 
 * [14. Testing](#14) 
   * [14.1 Testing Tools](#14-1) 
-* [References](#refs) 
-
+* [References](#refs)
 
 
 <br /><br /><br /><br /><br />
@@ -260,7 +259,7 @@ It is important to note the types of data you will be sharing and what protectiv
 
 
 <br /><br />
-<h2 id="1-5">1.6 Sample Swagger Definition</h2>
+<h2 id="1-5">1.5 Sample Swagger Definition</h2>
 A sample Swagger template that exposes APIs methods and conforms to the Service Design Guide is provided here to help API Designers get started.
 
 The template is available in [JSON format](api-example-swagger-v1.4.json). 
@@ -281,7 +280,7 @@ Once the Swagger definition has been copied, designers can perform the following
 **NB. This Swagger example demonstrates how an API could be defined. Always check the the repository for the latest copy of the template and examples.**
 
 
-<h2 id="1-7">1.7 The choice behind REST</h2>
+<h2 id="1-6">1.6 The choice behind REST</h2>
 
 Modern developers have largely accepted REST as the de-facto mechanism of data representation and transfer to/and from systems on the internet.
 
