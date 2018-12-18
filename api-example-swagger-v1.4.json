@@ -1,0 +1,552 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is an **example** API to demonstrate features of The API Factory.\n\n# Introduction\nThis specification is intended to to be a good starting point for describing\nhow users can interact with the various retrieval methods of your API. As\npart of Team API design guidelines we recommend informing the user about\nvarious aspects of your api such as:\n\n\n# Getting Started\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\ncillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat\nnon proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n\n\n  ## **Using The API**\n  This API provides data in the following formats:\n    - API format XXXX                 # Describe your exposed API format\n    - API format XXXX                 # Describe your exposed API format\n\n  The following sections describe how to use these formats:\n\n\n  ## API Endpoint `/xxxx`:\n  The `/xxxx` Endpoint is available at the `/xxxx` endpoint. This endpoint can\n  provide information in the following formats by using the `outputformat`\n  query parameter.\n\n   - application/json               # Replace with your output format\n   - application/atom+xml           # Replace with your output format\n\n\n ## Extra Developer Documentation:\n  If you have more developer documentation or tutorials specific to helping\n  developers interact with this endpoint.\n  **url:** 'https://example.com/documentation/link'\n\n# Uptime & Planned Outages\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod\ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\nquis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\nconsequat.\n\n\n# Authentication & Rate Limits\nNo authentication is currently required to use the retrieval methods\npublished in this API. It is at the discretion of the XXXXX team whether the\nauthentication and rate limiting changes in the future.\n\nThere is also no current rate limits being enforced, however it is advised\nthat users keep their queries to ~2-3 calls per second to avoid overloading\nthe service.\n\n\n# Terms of Use, Copyright and Attribution\nPlease ensure you comply with the following policies prior to using any data\nwithin this API.\n\n- [Terms of Use](https://www.XXXX.vic.gov.au/terms-use)\n- [Privacy Policy](https://www.XXXX.vic.gov.au/privacy)\n- [Copyright and Attribution](https://www.XXXX.vic.gov.au/copyright-and-attribution)\n- [Department/Information Website](http://XXXX.vic.gov.au/digital)\n\nTo the maximum extent possible, the datasets provided via this site and their contents, to the extent they are protected by copyright, are provided under a [XXXX What type of Licence Agreement XXXX\neg: Creative Commons Attribution Version 4.0 (international licence)](https://creativecommons.org/licenses/by/4.0/).\n\n# Contact Us\nIf you have a suggestion please contact us at .....\n",
+    "contact" : {
+      "email" : "youremail@dpc.vic.gov.au",
+      "url" : "https://example.com/contact"
+    },
+    "version" : "1.4.0",
+    "title" : "Example.com"
+  },
+  "schemes" : [ "https" ],
+  "produces" : [ "application/json", "application/xml", "multipart/form-data", "application/x-www-form-urlencoded" ],
+  "consumes" : [ "application/json", "application/xml", "multipart/form-data", "text/html" ],
+  "tags" : [ {
+    "name" : "Echo",
+    "description" : "Example echo operations"
+  }, {
+    "name" : "User",
+    "description" : "Example operations about user"
+  } ],
+  "securityDefinitions" : {
+    "main_auth" : {
+      "type" : "oauth2",
+      "authorizationUrl" : "http://example.com/api/oauth/dialog",
+      "flow" : "implicit",
+      "scopes" : {
+        "read:users" : "read users info",
+        "write:users" : "modify or remove users"
+      }
+    },
+    "api_key" : {
+      "type" : "apiKey",
+      "name" : "api_key",
+      "in" : "header"
+    },
+    "basic_auth" : {
+      "type" : "basic"
+    }
+  },
+  "paths" : {
+    "/echo" : {
+      "post" : {
+        "tags" : [ "Echo" ],
+        "summary" : "Echo test",
+        "description" : "Receive the exact message you've sent\n<br />***You can use keep using `markdown` here to write out your description in more detail.***\n",
+        "operationId" : "echo",
+        "parameters" : [ {
+          "name" : "message",
+          "in" : "body",
+          "description" : "Echo payload",
+          "required" : true,
+          "schema" : {
+            "type" : "string",
+            "example" : "Hello world!"
+          }
+        } ],
+        "security" : [ {
+          "api_key" : [ ]
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "OK. <br /> The request was successfully processed.\n",
+            "examples" : {
+              "application/json" : "Hello world!"
+            },
+            "schema" : {
+              "type" : "string"
+            },
+            "headers" : {
+              "X-Rate-Limit" : {
+                "format" : "int32",
+                "description" : "calls per hour allowed by the user",
+                "type" : "integer"
+              },
+              "X-Expires-After" : {
+                "format" : "date-time",
+                "description" : "date in UTC when token expires",
+                "type" : "string"
+              }
+            }
+          },
+          "201" : {
+            "$ref" : "#/responses/201_error_response"
+          },
+          "202" : {
+            "$ref" : "#/responses/202_error_response"
+          },
+          "400" : {
+            "$ref" : "#/responses/400_error_response"
+          },
+          "401" : {
+            "$ref" : "#/responses/401_error_response"
+          },
+          "403" : {
+            "$ref" : "#/responses/403_error_response"
+          },
+          "404" : {
+            "$ref" : "#/responses/404_error_response"
+          },
+          "405" : {
+            "$ref" : "#/responses/405_error_response"
+          },
+          "415" : {
+            "$ref" : "#/responses/415_error_response"
+          },
+          "422" : {
+            "$ref" : "#/responses/422_error_response"
+          },
+          "500" : {
+            "$ref" : "#/responses/500_error_response"
+          }
+        }
+      }
+    },
+    "/users" : {
+      "get" : {
+        "tags" : [ "User" ],
+        "summary" : "Get a full list of users",
+        "description" : "Some description of the operation.\n<br />***You can use keep using `markdown` here to write out your description in more detail.***\n",
+        "operationId" : "getAllUsers",
+        "parameters" : [ {
+          "name" : "username",
+          "in" : "path",
+          "description" : "The name that needs to be fetched",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "with_email",
+          "in" : "query",
+          "description" : "Filter users without email",
+          "type" : "boolean"
+        } ],
+        "security" : [ {
+          "main_auth" : [ "read:users" ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK. <br /> The request was successfully processed.\n",
+            "schema" : {
+              "$ref" : "#/definitions/UserCollectionResponse"
+            }
+          },
+          "400" : {
+            "$ref" : "#/responses/400_error_response"
+          },
+          "401" : {
+            "$ref" : "#/responses/401_error_response"
+          },
+          "403" : {
+            "$ref" : "#/responses/403_error_response"
+          },
+          "404" : {
+            "$ref" : "#/responses/404_error_response"
+          },
+          "405" : {
+            "$ref" : "#/responses/405_error_response"
+          },
+          "415" : {
+            "$ref" : "#/responses/415_error_response"
+          },
+          "500" : {
+            "$ref" : "#/responses/500_error_response"
+          }
+        }
+      }
+    },
+    "/users/{username}" : {
+      "parameters" : [ {
+        "name" : "pretty_print",
+        "in" : "query",
+        "description" : "Pretty print response",
+        "type" : "boolean"
+      } ],
+      "get" : {
+        "tags" : [ "User" ],
+        "summary" : "Get user by user name",
+        "description" : "Some description of the operation.\n<br />***You can use keep using `markdown` here to write out your description in more detail.***\n",
+        "operationId" : "getUserByName",
+        "parameters" : [ {
+          "name" : "username",
+          "in" : "path",
+          "description" : "The name that needs to be fetched",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "with_email",
+          "in" : "query",
+          "description" : "Filter users without email",
+          "type" : "boolean"
+        } ],
+        "security" : [ {
+          "main_auth" : [ "read:users" ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "produces" : [ "application/json" ],
+        "responses" : {
+          "200" : {
+            "description" : "OK. <br /> The request was successfully processed.\n",
+            "schema" : {
+              "$ref" : "#/definitions/UserEmbeddedResponse"
+            }
+          },
+          "400" : {
+            "$ref" : "#/responses/400_error_response"
+          },
+          "401" : {
+            "$ref" : "#/responses/401_error_response"
+          },
+          "403" : {
+            "$ref" : "#/responses/403_error_response"
+          },
+          "404" : {
+            "$ref" : "#/responses/404_error_response"
+          },
+          "405" : {
+            "$ref" : "#/responses/405_error_response"
+          },
+          "415" : {
+            "$ref" : "#/responses/415_error_response"
+          },
+          "500" : {
+            "$ref" : "#/responses/500_error_response"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "User" ],
+        "summary" : "Update the user",
+        "description" : "This can only be done by the logged in user.\n",
+        "operationId" : "updateUser",
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "username",
+          "in" : "path",
+          "description" : "The name that needs to be updated",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Updated user object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/UserRequest"
+          }
+        } ],
+        "security" : [ {
+          "main_auth" : [ "write:users" ]
+        }, {
+          "api_key" : [ ]
+        } ],
+        "responses" : {
+          "200" : {
+            "$ref" : "#/definitions/UserResponse"
+          },
+          "202" : {
+            "$ref" : "#/definitions/UserResponse"
+          },
+          "204" : {
+            "$ref" : "#/responses/204_error_response"
+          },
+          "400" : {
+            "$ref" : "#/responses/400_error_response"
+          },
+          "401" : {
+            "$ref" : "#/responses/401_error_response"
+          },
+          "403" : {
+            "$ref" : "#/responses/403_error_response"
+          },
+          "404" : {
+            "$ref" : "#/responses/404_error_response"
+          },
+          "405" : {
+            "$ref" : "#/responses/405_error_response"
+          },
+          "415" : {
+            "$ref" : "#/responses/415_error_response"
+          },
+          "422" : {
+            "$ref" : "#/responses/422_error_response"
+          },
+          "500" : {
+            "$ref" : "#/responses/500_error_response"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "User" ],
+        "summary" : "Delete user",
+        "description" : "This can only be done by the logged in user.\n",
+        "operationId" : "deleteUser",
+        "produces" : [ "application/json", "application/xml" ],
+        "parameters" : [ {
+          "name" : "username",
+          "in" : "path",
+          "description" : "The name that needs to be deleted",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "$ref" : "#/responses/200_error_response"
+          },
+          "202" : {
+            "$ref" : "#/responses/202_error_response"
+          },
+          "204" : {
+            "$ref" : "#/responses/204_error_response"
+          },
+          "400" : {
+            "$ref" : "#/responses/400_error_response"
+          },
+          "401" : {
+            "$ref" : "#/responses/401_error_response"
+          },
+          "403" : {
+            "$ref" : "#/responses/403_error_response"
+          },
+          "404" : {
+            "$ref" : "#/responses/404_error_response"
+          },
+          "405" : {
+            "$ref" : "#/responses/405_error_response"
+          },
+          "415" : {
+            "$ref" : "#/responses/415_error_response"
+          },
+          "500" : {
+            "$ref" : "#/responses/500_error_response"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "UserCollectionResponse" : {
+      "description" : "The standard list response that should be used",
+      "properties" : {
+        "totalRecords" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 50
+        },
+        "_links" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/HateoasResponse"
+          }
+        },
+        "_embedded" : {
+          "$ref" : "#/definitions/UserEmbeddedResponse"
+        }
+      }
+    },
+    "UserEmbeddedResponse" : {
+      "type" : "object",
+      "properties" : {
+        "count" : {
+          "type" : "number",
+          "format" : "int32",
+          "example" : 1
+        },
+        "users" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/UserResponse"
+          }
+        }
+      }
+    },
+    "HateoasResponse" : {
+      "type" : "object",
+      "properties" : {
+        "href" : {
+          "type" : "string",
+          "example" : "/users",
+          "description" : "The URL to the referenced resource"
+        },
+        "rel" : {
+          "type" : "string",
+          "example" : "self",
+          "description" : "The description of the relationship between the resources"
+        },
+        "method" : {
+          "type" : "string",
+          "example" : "GET",
+          "description" : "The HTTP method that should be used when referencing this resource",
+          "enum" : [ "GET", "POST", "PUT", "DELETE", "PATCH" ]
+        }
+      }
+    },
+    "Email" : {
+      "description" : "User email address",
+      "type" : "string",
+      "format" : "email",
+      "example" : "john.smith@example.com"
+    },
+    "UserRequest" : {
+      "type" : "object",
+      "properties" : {
+        "username" : {
+          "description" : "User supplied username",
+          "type" : "string",
+          "minLength" : 4,
+          "example" : "John78"
+        },
+        "firstName" : {
+          "description" : "User first name",
+          "type" : "string",
+          "minLength" : 1,
+          "example" : "John"
+        },
+        "lastName" : {
+          "description" : "User last name",
+          "type" : "string",
+          "minLength" : 1,
+          "example" : "Smith"
+        },
+        "email" : {
+          "$ref" : "#/definitions/Email"
+        }
+      }
+    },
+    "UserResponse" : {
+      "type" : "object",
+      "example" : {
+        "username" : "John78",
+        "firstName" : "John",
+        "lastName" : "Smith",
+        "email" : "john.smith78@gmail.com",
+        "_links" : [ {
+          "href" : "/users/John78",
+          "rel" : "self",
+          "method" : "GET"
+        }, {
+          "href" : "/users/John78",
+          "rel" : "updateUser",
+          "method" : "PUT"
+        }, {
+          "href" : "/users/John78",
+          "rel" : "deleteUser",
+          "method" : "DELETE"
+        } ]
+      },
+      "allOf" : [ {
+        "$ref" : "#/definitions/UserRequest"
+      }, {
+        "type" : "object",
+        "properties" : {
+          "_links" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/definitions/HateoasResponse"
+            }
+          }
+        }
+      } ]
+    }
+  },
+  "responses" : {
+    "200_error_response" : {
+      "description" : "OK.",
+      "examples" : {
+        "application/json" : "{\n  \"status\": \"200\",\n  \"description\": \"The request was successfully processed.\",\n  \"more_info\": \"\"\n}    \n"
+      }
+    },
+    "201_error_response" : {
+      "description" : "Created.",
+      "examples" : {
+        "application/json" : "{\n  \"status\": \"201\",\n  \"description\": \"The resource was created. The Response Location HTTP header should be returned to indicate where the newly created resource is accessible.\",\n  \"more_info\": \"\"\n} \n"
+      }
+    },
+    "202_error_response" : {
+      "description" : "Accepted.",
+      "examples" : {
+        "application/json" : "{\n  \"status\": \"202\",\n  \"description\": \"Used for asynchronous processing - The server has accepted the request but the result is not available yet. The Response Location HTTP header may be returned to indicate where the created resource will be accessible.\",\n  \"more_info\": \"\"\n} \n"
+      }
+    },
+    "204_error_response" : {
+      "description" : "No content.",
+      "examples" : {
+        "application/json" : "{\n  \"status\": \"204\",\n  \"description\": \"The server successfully processed the request and is not returning any content. \",\n  \"more_info\": \"\"\n} \n"
+      }
+    },
+    "400_error_response" : {
+      "description" : "Bad Request.",
+      "examples" : {
+        "application/json" : "{\n  \"status\": \"400\",\n  \"description\": \"The server cannot process the request.'The specified resource was not found.\",\n  \"more_info\": \"\"\n} \n"
+      }
+    },
+    "401_error_response" : {
+      "description" : "Unauthorised.",
+      "examples" : {
+        "application/json" : "{\n  \"status\": \"401\",\n  \"description\": \"The request could not be authenticated.\",\n  \"more_info\": \"\"\n}\n"
+      }
+    },
+    "403_error_response" : {
+      "description" : "Forbidden.",
+      "examples" : {
+        "application/json" : "{\n  \"status\": \"403\",\n  \"description\": \"The request was authenticated but is not authorised to access the resource.\",\n  \"more_info\": \"\"\n}\n"
+      }
+    },
+    "404_error_response" : {
+      "description" : "Not found.",
+      "examples" : {
+        "application/json" : "{\n  \"status\": \"404\",\n  \"description\": \"The resource was not found.\",\n  \"more_info\": \"\"\n}\n"
+      }
+    },
+    "405_error_response" : {
+      "description" : "Not Allowed.",
+      "examples" : {
+        "application/json" : "{\n  \"status\": \"405\",\n  \"description\": \"The method is not implemented for this resource. The response may include an Allow header containing a list of valid methods for the resource.\",\n  \"more_info\": \"\"\n}\n \n"
+      }
+    },
+    "408_error_response" : {
+      "description" : "Request Timeout.",
+      "examples" : {
+        "application/json" : "{\n  \"status\": \"408\",\n  \"description\": \"The request timed out before a response was received.\",\n  \"more_info\": \"\"\n}\n"
+      }
+    },
+    "415_error_response" : {
+      "description" : "Unsupported Media Type.",
+      "examples" : {
+        "application/json" : "{\n  \"status\": \"415\",\n  \"description\": \"This status code indicates that the server refuses to accept the request because the content type specified in the request is not supported by the server.\",\n  \"more_info\": \"\"\n}\n"
+      }
+    },
+    "422_error_response" : {
+      "description" : "Unprocessable Entity.",
+      "examples" : {
+        "application/json" : "{\n  \"status\": \"422\",\n  \"description\": \"This status code indicates that the server received the request but it did not fulfil the requirements of the back end. An example is a mandatory field was not provided in the payload.\",\n  \"more_info\": \"\"\n}\n"
+      }
+    },
+    "500_error_response" : {
+      "description" : "Internal Server Error.",
+      "examples" : {
+        "application/json" : "{\n  \"status\": \"500\",\n  \"description\": \"An internal server error. The response body may contain error messages.\",\n  \"more_info\": \"\"\n}\n \n"
+      }
+    },
+    "501_error_response" : {
+      "description" : "Method Not Implemented.",
+      "examples" : {
+        "application/json" : "{\n  \"status\": \"501\",\n  \"description\": \"It indicates that the request method is not supported by the server and cannot be handled for any resourceFor example, the server supports GET, POST, PUT, DELETE, and PATCH but not OPTIONS methods.\",\n  \"more_info\": \"\"\n}"
+      }
+    }
+  }
+}
