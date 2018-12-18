@@ -557,7 +557,7 @@ URLs **MUST** follow the standard naming convention as described below:
 
 
 ```
-   https://gw.api.vic.gov.au/namespace/project-name/v1/attributes=first_name,last_name
+   https://gw.api.vic.gov.au/namespace/v1/project-name?attributes=first_name,last_name
    \___/   \_______________/\________________________/\______________________________/
      |           |                |                   |                                   
   scheme     authority           path               query                             
