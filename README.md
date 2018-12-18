@@ -1,8 +1,8 @@
-# Victorian Government - API Design Standard
+# Victorian Government - API Design Standard - DRAFT FOR REVIEW
 
 The Victorian Department of Premier and Cabinet has recently created the Digital, Design and Innovation Group as part of the Governance, Policy and Coordination Division.
 
-A key function of this group is to provide standards for information access across government, its partners and the community, bringing governance and security, opportunities for innovative rapid development, and enhanced data consistency and discoverability.​
+A key function of this group is to provide standards for information access across government, its partners and the community, bringing governance and security, opportunities for innovative rapid development, and enhanced data consistency and discoverability.
 
 These API standards are a starting point for collaboration across government to ensure interoperability is front of mind when creating or modifying digital services across government.
 
@@ -10,7 +10,7 @@ A working group is being formulated as part of the Victorian Government CIO Lead
 
 This repository is being used to seek feedback from the working group, and also provide a view to the general public on the standards that are being created within government.  These standards should also be applicable for entites outside of government and their use is encouraged.
 
-The API Standards have been written by the API Team, lead by Jordan Walsh.  You can see open issues and proposed decision points for feedback on the issues page here.
+The API Standards have been written by the API Team, lead by Jordan Walsh.  Reviewers and contributors can see open issues and proposed decision points for feedback on the issues page here.
 
 For more information see the contact information below.
 
