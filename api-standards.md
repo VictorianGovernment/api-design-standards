@@ -1384,7 +1384,7 @@ The following status codes represent appropriate responses to the different oper
 
 
 | Request Method | Resource Path | Status | Code |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | 
 | GET | `/resources/` | OK | 200 |
 ||| Bad Request | 400 | 
 ||| Unauthorised | 401 | 
