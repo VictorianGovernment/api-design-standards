@@ -24,6 +24,7 @@ The words `REST` and `RESTful` **MUST** be written as presented here, representi
 Machine-readable text, such as URLs, HTTP verbs and source code, are represented using a fixed-width font.
 
 ______________________________________________________________________________
+
 # Contact information
 
 API Team<br/>
@@ -32,6 +33,7 @@ Department of Premier and Cabinet<br/>
 [apiteam@dpc.vic.gov.au](mailto:apiteam@dpc.vic.gov.au)
 
 ______________________________________________________________________________
+
 # Table of contents
 
 * [1. Getting started: Building an API](#1) 
@@ -74,7 +76,7 @@ ______________________________________________________________________________
   * [5.3 Minor version](#5-3) 
   * [5.4 Minor and patch documentation](#5-4) 
   * [5.5 Backwards compatibility](#5-5) 
-  * [5.6 End of life policy](#5-6) 
+  * [5.6 End-of-life policy](#5-6) 
     * [5.6.1 Minor API version EOL](#5-6-1) 
     * [5.6.2 Major API version EOL](#5-6-2) 
     * [5.6.3 Replacement major API version](#5-6-3) 
@@ -286,7 +288,6 @@ Date (Short form) | `/dates/2018-09-17`
 
 As long as the identifier is unique within your application it can be any string of characters or numbers. It is RECOMMENDED that if numeric IDs are used, they are not sequential (eg it is not trivial to guess the next ID).
 
-<br /><br />
 <h3 id="2-1-4">2.1.4 Representation</h3>
 
 A key concept in RESTful API design is the idea of the representation of a resource at any particular time.
@@ -342,10 +343,10 @@ To make use of any of the namespaces, resources and resource identifiers, develo
 
 An operation is defined by the use of:
 
-- an HTTP method; and
-- a resource path.
+- an HTTP method
+- a resource path
   
-Examples:
+### Examples
 ```javascript
 GET /employees
 DELETE /employees/john-smith
@@ -420,7 +421,7 @@ The required file format for the API Description is JSON since its most widely s
 
 In order to follow the versioning recommendations in this standard there must be one Swagger description per major version.
 
-For example; if your API product exposes and maintains 3 major versions of its REST API then you must provide 3 Swagger descriptions (one for each version: v1, v2 and v3).
+For example, if your API product exposes and maintains 3 major versions of its REST API then you must provide 3 Swagger descriptions (one for each version: v1, v2 and v3).
 
 <h2 id="3-3">3.3 API developer experience and ease of use</h2>
 
@@ -445,9 +446,9 @@ Should the API contract need to change in a manner that breaks the consumers con
 ______________________________________________________________________________
 <h1 id="4">4. Naming conventions</h1>
 <h2 id="4-1">4.1 Message format</h2>
-For request and response body and query parameter names the message format is **RECOMMENDED** to use snake case:
+For request and response body and query parameter names the message format is **RECOMMENDED** to use snake case.
 
-Example:
+#### Example:
 
 ```javascript
 // this_is_snake_case
@@ -459,7 +460,7 @@ Example:
 
 If snake case is not available, it is then **RECOMMENDED** to use camel case.
 
-Example:
+#### Example:
 
 ```javascript
 // thisIsCamelCase
@@ -550,7 +551,7 @@ A link relation **MUST** contain the following elements:
 - rel - the textual string describing what this entity is
 - method - the HTTP method that **SHOULD** be used when using this related resource.
 
-Example:
+#### Example:
 
 ```javascript
 "links": [
@@ -587,7 +588,6 @@ Specify optional fields in a comma separated list:<br />
 Add a new location to a particular employee:<br />
   `POST` https://gw.api.vic.gov.au/e09284/v1/employees/1234/locations<br />
 
-<br />
 <h3 id="4-6-2">4.6.2 Examples of bad URLs</h3>
 Non-plural endpoint:<br />
 
@@ -642,7 +642,7 @@ Minor version numbers are displayed on the API documentation page or part of a s
 
 Additional metadata can be added to the response if required.
 
-Example:
+#### Example:
 
 ```javascript
 GET /namespace/v1/
@@ -667,7 +667,7 @@ API product version and API implementation version are **NOT** the same.
 
 A product version is the logical version that is applied to the API for documentation and reference purpose. The implementation version is the physical build version that was created.
 
-For example:
+#### Example:
 
 | Product version | API implementation version | Change Type | Version Change |
 | --- | --- | --- | --- |
@@ -697,7 +697,7 @@ The following changes are **NOT** deemed to be backwards compatible:
 
 Any of these changes **MUST** require a major version update so these should be managed with caution.
 
-<h2 id="5-6">5.6 End of life policy</h2>
+<h2 id="5-6">5.6 End-of-life policy</h2>
 
 When designing new APIs, one of the most important dates to consider is when the API will be retired.
 
@@ -756,7 +756,7 @@ When a newer API is available API owners are **RECOMMENDED** to provide two head
 - X-API-Deprecated - boolean field advising that this has been deprecated
 - X-API-Retire-Time - ISO8601 date advising when it will be deprecated
 
-For example:
+#### Example:
 
 ```
 GET `/namespace/v1`
@@ -895,7 +895,7 @@ The following parameters are also common across REST APIs, but are **not** to be
 <h3 id="7-1-2">7.1.2 Metadata</h3>
 When pagination is included it is **RECOMMENDED** for APIs to advise the user in the response body what page they are on. If not included, the user is forced to inspect the request often requiring unnecessary code to parse query parameters.
 
-An example of this is as follows:
+#### Example:
 
 ```javascript
 {
@@ -941,7 +941,7 @@ Example that returns only the `first_name` and `last_name` fields in the respons
 
 Attributes can be used to filter a collection of resources.
 
-Example:
+#### Example:
 
 ```
 ?last_name=Citizen
@@ -949,7 +949,7 @@ Example:
 
 will filter out the collection of resources with the attribute `last_name` that matches `Citizen`.
 
-Example:
+#### Example:
 
 ```
 ?last_name=Citizen&date_of_birth=1999-12-31
@@ -978,7 +978,7 @@ The following operators are supported:
 
 The AND, OR conditions are supported.
 
-Example:
+#### Example:
 
 ```
 ?filters=creation_date =\> 2001-09-20T13:00:00 and creation_date \<= 2001-09-21T13:00:00 and first_name like 'fred' and post_code=3000
@@ -1007,7 +1007,7 @@ The two parameters that make up sorting are as follows:
 
 `sort_fields` is plural as the following options are both available:
 
-Examples:
+#### Examples:
 
 - `?sort=asc&sort_fields=name,last_modified`<br/>
 - `?sort=desc&sort_fields=name&sort_fields=last_modified`
@@ -1036,33 +1036,34 @@ The following response headers **MAY** be included in all responses:
 <h2 id="8-2">8.2 HTTP response codes</h2>
 
 The following table defines the responses that **MUST** be supported by your API.
+<br />
 
 | Request method | Status | Code | When to use |
 | --- | --- | --- | --- |
 | GET | OK | 200 | The request was successfully processed |
 | GET | Bad Request | 400 | The server cannot process the request (such as malformed request syntax, size too large, invalid request message framing, or deceptive request routing, invalid values in the request) |
-|GET| Unauthorised | 401 | The request could not be authenticated. |
-|GET| Forbidden | 403 | The request was authenticated but is not authorised to access the resource. |
-|GET| Not found | 404 | The resource was not found. |
-|GET| Not Allowed | 405 | The method is not implemented for this resource. The response may include an Allow header containing a list of valid methods for the resource. |
-|GET| Unsupported Media Type | 415 | This status code indicates that the server refuses to accept the request because the content type specified in the request is not supported by the server |
-|GET| Internal Server error | 500 | An internal server error. The response body may contain error messages. |
+| GET | Unauthorised | 401 | The request could not be authenticated. |
+| GET | Forbidden | 403 | The request was authenticated but is not authorised to access the resource. |
+| GET | Not found | 404 | The resource was not found. |
+| GET | Not Allowed | 405 | The method is not implemented for this resource. The response may include an Allow header containing a list of valid methods for the resource. |
+| GET | Unsupported Media Type | 415 | This status code indicates that the server refuses to accept the request because the content type specified in the request is not supported by the server. |
+| GET | Internal Server error | 500 | An internal server error. The response body may contain error messages. |
 
-<br />
+
 | Request method | Status | Code | When to use |
 | --- | --- | --- | --- |
 | POST | Created | 201 | The resource was created. The Response Location HTTP header **SHOULD** be returned to indicate where the newly created resource is accessible. |
-|POST| Accepted | 202 | Is used for asynchronous processing to indicate that the server has accepted the request but the result is not available yet. The Response Location HTTP header may be returned to indicate where the created resource will be accessible. |
-|POST| Bad Request | 400 | The server cannot process the request (such as malformed request syntax, size too large, invalid request message framing, or deceptive request routing, invalid values in the request) For example, the API requires a numerical identifier and the client sent a text value instead, the server will return this status code. |
-|POST| Unauthorised | 401 | The request could not be authenticated. |
-|POST| Forbidden | 403 | The request was authenticated but is not authorised to access the resource. |
-|POST| Not found | 404 | The resource was not found. |
-|POST| Not Allowed | 405 | The method is not implemented for this resource. The response may include an Allow header containing a list of valid methods for the resource. |
-|POST| Unsupported Media Type | 415 | This status code indicates that the server refuses to accept the request because the content type specified in the request is not supported by the server |
-|POST| Unprocessable Entity | 422 | This status code indicates that the server received the request but it did not fulfil the requirements of the back end. An example is a mandatory field was not provided in the payload. |
-|POST| Internal Server error | 500 | An internal server error. The response body may contain error messages. |
+| POST | Accepted | 202 | Is used for asynchronous processing to indicate that the server has accepted the request but the result is not available yet. The Response Location HTTP header may be returned to indicate where the created resource will be accessible. |
+| POST | Bad Request | 400 | The server cannot process the request (such as malformed request syntax, size too large, invalid request message framing, or deceptive request routing, invalid values in the request) For example, the API requires a numerical identifier and the client sent a text value instead, the server will return this status code. |
+| POST | Unauthorised | 401 | The request could not be authenticated. |
+| POST | Forbidden | 403 | The request was authenticated but is not authorised to access the resource. |
+| POST | Not found | 404 | The resource was not found. |
+| POST | Not Allowed | 405 | The method is not implemented for this resource. The response may include an Allow header containing a list of valid methods for the resource. |
+| POST | Unsupported Media Type | 415 | This status code indicates that the server refuses to accept the request because the content type specified in the request is not supported by the server |
+| POST | Unprocessable Entity | 422 | This status code indicates that the server received the request but it did not fulfil the requirements of the back end. An example is a mandatory field was not provided in the payload. |
+| POST | Internal Server error | 500 | An internal server error. The response body may contain error messages. |
 
-<br />
+
 | Request method | Status | Code | When to use |
 | --- | --- | --- | --- |
 | PUT | Accepted | 202 | Is used for asynchronous processing to indicate that the server has accepted the request but the result is not available yet. |
@@ -1076,7 +1077,7 @@ The following table defines the responses that **MUST** be supported by your API
 |PUT| Unprocessable Entity | 422 | This status code indicates that the server received the request but it did not fulfil the requirements of the back end. An example is a mandatory field was not provided in the payload. |
 |PUT| Internal Server error | 500 | An internal server error. The response body may contain error messages. |
 
-<br />
+
 | Request method | Status | Code | When to use |
 | --- | --- | --- | --- |
 | DELETE | Accepted | 202 | Is used for asynchronous processing to indicate that the server has accepted the request but the result is not available yet. |
@@ -1089,7 +1090,7 @@ The following table defines the responses that **MUST** be supported by your API
 |DELETE| Unsupported Media Type | 415 | This status code indicates that the server refuses to accept the request because the content type specified in the request is not supported by the server |
 |DELETE| Internal Server error | 500 | An internal server error. The response body may contain error messages. |
 
-<br />
+
 | Request method | Status | Code | When to use |
 | --- | --- | --- | --- |
 | PATCH | Accepted | 202 | Is used for asynchronous processing to indicate that the server has accepted the request, but the result is not available yet. |
@@ -1104,7 +1105,7 @@ The following table defines the responses that **MUST** be supported by your API
 |PATCH| Internal Server error | 500 | An internal server error. The response body may contain error messages. |
 
 <br />
-This table highlights the status codes that are applicable for all HTTP methods
+This table highlights the status codes that are applicable for all HTTP methods.
 
 | Request method | Status | Code | When to use |
 | --- | --- | --- | --- |
@@ -1295,7 +1296,7 @@ The API Team provides an OAuth service that can be used by WoVG APIs. Alternativ
 
 There are multiple levels of abstraction and determining the level of abstraction is largely based on the number of consumers and the cost to change the system in response to an API change.
 
-As a general principle there should be a level of abstraction of the source system data and business logic in your API design to decouple the consumers and the API service provider(s). Applying BASIC abstraction to a SaaS API (such as an Azure API) is recommended. For example; if there are changes in the SaaS authentication schema it could be handled within the API. 
+As a general principle there should be a level of abstraction of the source system data and business logic in your API design to decouple the consumers and the API service provider(s). Applying BASIC abstraction to a SaaS API (such as an Azure API) is recommended. For example, if there are changes in the SaaS authentication schema it could be handled within the API. 
 
 A higher level of abstraction would be required for APIs that have multiple consumers and the cost of change to the API consumers is greater than the cost to change the backend systems / service providers.
 
@@ -1607,7 +1608,7 @@ In summary:
 - The client does not need to build the logic of composing URIs to execute different requests or code any kind of business rule by looking into the response details that may be associated with the URIs and state changes.
 - The client acknowledges the fact that the process of creating URIs belongs to the server.
 - Client treats URIs as opaque identifiers.
-- APIs using hypermedia in representations could be extended seamlessly. As new methods are introduced responses could be extended with relevant HATEOAS links. This way clients could take advantage of the functionality in incremental fashion. For example; if the API starts supporting a new `PATCH` operation then clients could use it to do partial updates.
+- APIs using hypermedia in representations could be extended seamlessly. As new methods are introduced responses could be extended with relevant HATEOAS links. This way clients could take advantage of the functionality in incremental fashion. For example, if the API starts supporting a new `PATCH` operation then clients could use it to do partial updates.
 
 The mere presence of links does not decouple a client from having to learn the data required to make requests for a transition and all associated link semantics particularly for `POST`/`PUT`/`PATCH` operations. An API **MUST** provide documentation to clearly describe all the links, link relation types and request response formats for each of the URIs.
 
