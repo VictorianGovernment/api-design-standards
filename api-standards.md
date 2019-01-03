@@ -1,29 +1,38 @@
 # Victorian Government API design standards - DRAFT FOR REVIEW
 
-Design standards for Whole of Victorian Government (WoVG) Application Programming Interfaces (API)s. 
-
 **Draft under review** from the Department of Premier and Cabinet API Team.
-
 # Introduction
-The goal of this document is to ensure consistency and standardisation when designing and building APIs to be used by agencies across the whole of Victorian Government (WoVG). Our mission is to ensure the highest standards are obtained by defining a base level of delivery and only describing expansion when further comment is required.
 
-The intent is to maintain a living document that adapts to changes in the landscape of web API delivery but at the same time being mindful of established standards presently adopted inside and outside the WoVG.
+This repository contains design standards for Victorian Government application programming interfaces (APIs).
 
-It is expected that anything not described in this document is to be implemented from best practices with a view of interoperability, maintainability and future direction. Gaps, errors or new best practices should be brought to the attention of The API Team [apiteam@dpc.vic.gov.au](mailto:apiteam@dpc.vic.gov.au).
+Edits, feedback and suggestions are welcome, either in Github or via email to the API team [apiteam@dpc.vic.gov.au](mailto:apiteam@dpc.vic.gov.au).
 
-## Document audience
-The audience for this document is API developers, solution architects and business analysts designing a new API or making changes to an existing service in order to improve aspects of usability, readability or security.
+## Goals
 
-This document has been written for use principally within the Victorian Government. However, it is being released for broader adoption by individuals or organisations wanting to build APIs that are interoperable with the WoVG standard.
+The goal of the Victorian Government API design standards is to ensure consistency and standardisation in APIs built to be used by Victorian Government departments and agencies. Our mission is to ensure the highest standards are achieved by defining a base level of delivery and only describing expansion when further comment is required.
 
-## Document semantics, formatting, and naming
-The keywords `MUST`, `MUST NOT`, `REQUIRED`, `SHALL`, `SHALL NOT`, `SHOULD`, `SHOULD NOT`, `RECOMMENDED`, `MAY`, and `OPTIONAL` in this document are to be interpreted as described in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
+This is a living document that will:
+- adapt to changes in the landscape of web API delivery
+- incorporate established standards currently adopted in the Victorian Government.
 
-The words `REST` and `RESTful` **MUST** be written as presented here, representing the acronym as all upper-case letters. This is also true of `JSON`, `XML` and other acronyms.
+Any aspects of API development not covered in this document should comply with current best practice. Interoperability, maintainability and future direction should all be considered. 
 
-Machine-readable text, such as URLs, HTTP verbs and source code, are represented using a fixed-width font.
+## Audience
 
-______________________________________________________________________________
+The audience for this document is API developers, solution architects and business analysts who are designing a new API or making changes to an existing service.
+
+These standards exist for use by the Victorian Government. They're also available for adoption by developers building APIs that are interoperable with products available on the [Victorian Government developer portal](https://developer.vic.gov.au).
+
+## Semantics, formatting and naming
+
+The keywords `MUST`, `MUST NOT`, `REQUIRED`, `SHALL`, `SHALL NOT`, `SHOULD`, `SHOULD NOT`, `RECOMMENDED`, `MAY` and `OPTIONAL` in this document are to be interpreted as described in [RFC 2119](https://www.ietf.org/rfc/rfc2119.txt).
+
+The following acronyms **MUST** words be written as presented here in all-caps:
+- `REST` (but `RESTful`)
+- `JSON`
+- `XML`
+
+Machine-readable text, such as URLs, HTTP methods/verbs and source code, are represented using a fixed-width font.
 
 # Contact information
 
@@ -37,24 +46,23 @@ ______________________________________________________________________________
 # Table of contents
 
 * [1. Getting started: Building an API](#1) 
-  * [1.1 Building APIs in government](#1-1) 
+  * [1.1 The Victorian Government API team](#1-1) 
   * [1.2 API as a product](#1-2) 
   * [1.3 Applying the standard](#1-3) 
   * [1.4 Privacy and security](#1-4) 
   * [1.5 Sample Swagger definition](#1-5) 
   * [1.6 The choice behind REST](#1-6) 
-* [2. Interpreting these guidelines](#2) 
-  * [2.1 Terms used](#2-1) 
-    * [2.1.1 API](#2-1-1) 
-    * [2.1.2 Resource](#2-1-2) 
-    * [2.1.3 Resource identifier](#2-1-3) 
-    * [2.1.4 Representation](#2-1-4) 
-    * [2.1.5 Namespace](#2-1-5) 
-    * [2.1.6 Operation](#2-1-6) 
+* [2. Terminology used in these guidelines](#2) 
+  * [2.1 API](#2-1) 
+  * [2.2 Resource](#2-2) 
+  * [2.3 Resource identifier](#2-3) 
+  * [2.4 Representation](#2-4) 
+  * [2.5 Namespace](#2-5) 
+  * [2.6 Operation](#2-6) 
 * [3. WoVG API requirements](#3) 
     * [3.1 API documentation](#3-1) 
     * [3.2 API development](#3-2) 
-    * [3.3 API Developer experience and ease of use](#3-3) 
+    * [3.3 API developer experience and ease of use](#3-3) 
     * [3.4 API stability](#3-4) 
 * [4. Naming conventions](#4) 
   * [4.1 Message format](#4-1) 
@@ -66,7 +74,7 @@ ______________________________________________________________________________
   * [4.3 Field names](#4-3) 
   * [4.4 Link relation names](#4-4) 
   * [4.5 Request headers](#4-5) 
-  * [4.6 Examples](#4-6) 
+  * [4.6 URL examples](#4-6) 
     * [4.6.1 Examples of good URLs](#4-6-1) 
     * [4.6.2 Examples of bad URLs](#4-6-2) 
 * [5. API versioning](#5) 
@@ -81,12 +89,12 @@ ______________________________________________________________________________
     * [5.6.2 Major API version EOL](#5-6-2) 
     * [5.6.3 Replacement major API version](#5-6-3) 
   * [5.7 API deprecation](#5-7) 
-* [6. API request](#6) 
+* [6. API requests](#6) 
   * [6.1 Request headers](#6-1) 
   * [6.2 HTTP request methods](#6-2) 
     * [6.2.1 Supported HTTP request methods](#6-2-1) 
-    * [6.2.2 Collection of resources](#6-2-2) 
-    * [6.2.3 Single resource](#6-2-3) 
+    * [6.2.2 Request methods for a collection of resources](#6-2-2) 
+    * [6.2.3 Request methods for a single resource](#6-2-3) 
   * [6.3 Request payload formats](#6-3) 
 * [7. Query parameters](#7) 
   * [7.1 Pagination](#7-1) 
@@ -98,12 +106,12 @@ ______________________________________________________________________________
     * [7.2.3 Advanced filtering](#7-2-3) 
     * [7.2.4 Match case sensitivity](#7-2-4) 
     * [7.2.5 Sorting](#7-2-5) 
-* [8. API Responses](#8) 
+* [8. API responses](#8) 
   * [8.1 Response headers](#8-1) 
   * [8.2 HTTP response codes](#8-2) 
   * [8.3 Response payload](#8-3) 
-    * [8.3.1 Single resource](#8-3-1) 
-    * [8.3.2 Collection of resources](#8-3-2) 
+    * [8.3.1 Response payload for a single resource](#8-3-1) 
+    * [8.3.2 Response payload for a collection of resources](#8-3-2) 
 * [9. Error handling](#9) 
   * [9.1 Error response payload](#9-1) 
   * [9.2 Input validation](#9-2) 
@@ -114,7 +122,7 @@ ______________________________________________________________________________
   * [10.3 Authentication and authorisation](#10-3) 
   * [10.4 Abstraction](#10-4) 
   * [10.5 Rate limiting](#10-5) 
-  * [10.6 Error handling](#10-6) 
+  * [10.6 Error messages](#10-6) 
   * [10.7 Audit logs](#10-7) 
   * [10.8 Input validation](#10-8) 
   * [10.9 Content type validation](#10-9) 
@@ -122,46 +130,45 @@ ______________________________________________________________________________
 * [11. Hypermedia](#11) 
   * [11.1 Hypermedia - linked data](#11-1) 
   * [11.2 HATEOAS](#11-2) 
-  * [11.3 Hypermedia compliant API](#11-3) 
-  * [11.4 Link description object](#11-4) 
-  * [11.5 Link relation type](#11-5) 
+  * [11.3 Hypermedia-compliant API](#11-3) 
+  * [11.4 Link description objects](#11-4) 
+  * [11.5 Link relation types](#11-5) 
 * [12. Networking](#12) 
   * [12.1 Caching](#12-1) 
     * [12.1.1 Cache-Control](#12-1-1) 
     * [12.1.2 Expires](#12-1-2) 
     * [12.1.3 Caching in the API gateway](#12-1-3) 
 * [13. Webhooks](#13) 
-  * [13.1 Current guidance](#13-1) 
 * [14. Testing](#14) 
   * [14.1 Testing tools](#14-1) 
 * [References](#refs)
 
 ______________________________________________________________________________
 <h1 id="1">1. Getting started: Building an API</h1>
-<h2 id="1-1">1.1 Building APIs in government</h2>
+<h2 id="1-1">1.1 The Victorian Government APIs team</h2>
 
-Government services are increasingly becoming digitised vastly increasing challenges like connectivity, service interoperability and data security. These challenges ensure departmental executives require API and integrations strategies as critical components of their technology arsenal in order to streamline services, simplify existing environments and de-risk implementations.
+Government services are increasingly becoming digitised. This creates challenges such as connectivity, service interoperability and data security. API and integrations strategies are critical components of our technology arsenal in order to streamline services, simplify existing environments and de-risk implementations.
 
-A number of online resources exist that teams, agencies and departments can utilise when looking to building and launch APIs and integrations - there was however a gap in official, ratified standards in the API and integration space and even more so within the Product Management community around APIs in government.
+There are a number of online resources on building and launching APIs and integrations. However, we identified a need for official, ratified standards for government APIs, integrations and product management.
 
-To address these challenges in March 2018 the Digital Engagement group as part of the Department of Premier and Cabinet formed the Whole of Victorian Government (WoVG) API Gateway team. This team is charged with:
+The Victorian Government API gateway team was established in March 2018 in the Digital, Design and Innovation Branch of Department of Premier and Cabinet. This team is charged with:
 
-- Creation of technology to support the development and exposure of APIs across the Victorian Government
-- Creation and collaboration holistic API design standards to be used across the WoVG
-- Consultation, training and support to improve overall literacy around APIs and Integrations
-- Engagement and evangelism of APIs and integrations both internally in government and out to partners and the community
-
-The sections that follow describe a high-level overview of the engagement process that the API Team works through with agencies that are looking to launch API capabilities across the WoVG. These can be referenced here or from the API Team directly at [apiteam@dpc.vic.gov.au](mailto:apiteam@dpc.vic.gov.au).
+- creation of technology to support the development and exposure of APIs across the Victorian Government
+- codesign of API design standards for the Victorian Government
+- consultation, training and support to improve overall literacy around APIs and integrations
+- engagement about and promotion of APIs and integrations in government and the community
 
 <h2 id="1-2">1.2 API as a product</h2>
 
 APIs facilitate information sharing both within an organisation and outside of the organisation. Careful design considerations must be applied to ensure APIs are fit for purpose and can be easily consumed. One method to achieve this is to treat any API as a product within an organisation and manage it appropriately.
 
-To productise an API, it requires an API owner who will act as an advocate for the customers. Someone who will work closely with the API designer to seek out opportunities for continual improvement in the API.
+To productise an API, you need an API owner who will:
+- act as an advocate for consumers
+- work closely with the API designer on opportunities for continual improvement
 
-APIs should be customer-centric – engage with the customer early in the design process to have a clear understanding of the customer needs. The design should follow user experience principles. Perform usability testing and address gaps as needed.
+APIs should be customer-centric. You should engage with the customer early in the design process to have a clear understanding of the customer needs. The design should follow user experience principles. It's important to perform usability testing and address gaps as needed.
 
-Below is a brief description of the phases of the API life cycle:   
+Here's a summary of the phases of the API life cycle:   
 
 - **Define** – Working with various stakeholders to identify the APIs to deliver the business requirements. Typically, the API abstraction requirement (BASIC, INTERMEDIATE, ADVANCED), specification and data model forms the output of this life cycle. 
  
@@ -183,7 +190,7 @@ Below is a brief description of the phases of the API life cycle:
 
 <h2 id="1-3">1.3 Applying the standard</h2>
 
-Knowing how and when to apply the API Design Standards will significantly influence the API Solution Design approach that you will take as an API Designer.  
+Knowing how and when to apply the API design standards will significantly influence the API solution design approach that you will take as an API designer.  
 
 Determining when to use the standard is based on the API Category and the required level of abstraction required. 
 
@@ -195,7 +202,7 @@ The level of abstraction applied to an API will vary depending on its intended r
 
 If there is no intention to reuse the API interface (i.e. point to point), then a **BASIC** level of abstraction is sufficient. If the number of consumers is likely to be high, then an **ADVANCED** level of abstraction is required to minimise impact to consumers when underlying systems are changed. Refer to the [Abstraction](#10-4) section of this standard for further information.
 
-**Notes:**
+#### Notes:
 
 - If your API falls into the System level API and is custom developed, it is **RECOMMENDED** that you use the standard as this will assist in developing Process or Experience level APIs if they are required in future.
 
@@ -207,9 +214,9 @@ This design guide itself does NOT apply to third-party System level APIs such as
 
 <h2 id="1-4">1.4 Privacy and security</h2>
 
-The security of the API must take a risk-based approach to determine the level of security controls required (based on the security classification of the information being exchanged).  
+API developers must take a risk-based approach to determine the level of security controls required, based on the security classification of the information being exchanged.
 
-It is highly recommended that a security classification is conducted on the information data model during the design of the API so that the appropriate security controls can be taken into consideration early.  
+We highly recommend that a security classification is conducted on the information data model during the design of the API so that the appropriate security controls can be taken into consideration early.  
 
 The data classification model used by the Victorian Government currently includes:
 
@@ -219,53 +226,53 @@ The data classification model used by the Victorian Government currently include
 - FOR OFFICIAL USE ONLY
 - PROTECTED
 
-All APIs published through the platform (at a minimum), **MUST** have a policy that only allows access based on a valid API key. As the level of classification increases stricter security policies and controls need to be applied - both within the platform as well as within the back-end API system itself.  
+At a minimum, all APIs published through on [developer.vic.gov.au](https://developer.vic.gov.au) **MUST** have a policy that only allows access based on a valid API key. 
 
-For example if the data classification resulted in PROTECTED, digital certificates may be required between the API and the API Consumer for authentication, encryption and non-repudiation. 
+Stricter security policies and controls need to be applied as the level of classification increases - both within the platform and in the back-end API system.
 
-It is important to note the types of data you will be sharing and what protective markings are required to ensure this is shared appropriately.
+For example, if the data classification is PROTECTED, digital certificates may be required between the API and the API consumer for authentication, encryption and non-repudiation. 
+
+Note the types of data you'll be sharing and what protective markings are required to ensure this is shared appropriately.
 
 <h2 id="1-5">1.5 Sample Swagger definition</h2>
-A sample Swagger template that exposes APIs methods and conforms to the Service Design Guide is provided here to help API Designers get started.
+
+We've provided a sample Swagger template to help API Designers get started. The template exposes API methods and conforms to the Victorian Government API design standards. Use this template as a basis for your API definition.
 
 The template is available in [JSON format](api-example-swagger-v1.4.json). 
 
-API Designers can use this template as a basis to start their API definition from a standards-compliant starting point.
+Copy the Swagger definition and then:
 
-Once the Swagger definition has been copied, designers can perform the following tasks:
-
-1. Provide a relevant description of the API – Refer to line number 5.
-2. Review and update the description
+1. Provide a description of your API (see line 5 in the template).
+2. Review and update the description.
 3. For each method:
 
-    - Update the field definition
-    - Update the description
-    - Provide examples
-    - Review the status codes and error messages and update as required
+    - update the field definition
+    - update the description
+    - provide examples
+    - review the status codes and error messages and update them as required
 
-**NB. This Swagger example demonstrates how an API could be defined. Always check the the repository for the latest copy of the template and examples.**
+**NB. Always check the the repository for the latest copy of the template and examples.**
 
-<h2 id="1-6">1.6 The choice behind REST</h2>
+<h2 id="1-6">1.6 Why we chose REST for these standards</h2>
 
-Modern developers have largely accepted REST as the de-facto mechanism of data representation and transfer to/and from systems on the internet.
+Modern developers have largely accepted REST as the de facto mechanism of data representation and transfer to and from systems on the internet.
 
-REST performs well when modelling systems and data. The principles can be applied to systems that are both large and small and the tooling available to developers largely supports data access out of the box.
+REST performs well when modelling systems and data. The principles can be applied to large and small systems. The developer tools available support data access out of the box.
 
-REST APIs typically are not good for streaming data (websockets) nor are they the best use for largely function based APIs (JSON-RPC). GraphQL is an alternative that handles these aspects of development in a different way and was considered as an option for WoVG standards.
+REST APIs are not generally good for streaming data (websockets) nor are they the best use for largely function-based APIs (JSON-RPC). We considered GraphQL as an option, as it handles these aspects of development in a different way.
 
-As the tooling for REST APIs is far more advanced, and the general technology literacy across government is already reasonably versed with REST APIs and design principles, it was determined that REST would be the de-facto standard for APIs in the Victorian Government.
+We decided on REST because the tooling for APIs is far more advanced and we found that developers in government are already reasonably familiar with REST APIs and design principles.
 
 ______________________________________________________________________________
-<h1 id="2">2. Interpreting these guidelines</h1>
-<h2 id="2-1">2.1 Terms used</h2>
-<h3 id="2-1-1">2.1.1 API</h3>
+<h1 id="2">2. Terminology used in these guidelines</h1>
+<h2 id="2-1">2.1 API</h2>
 In the context of this Service Design Guide an API (Application Programming Interface) is defined as a RESTful API.  
 
 A RESTful API is a style of communication between systems where resources are defined by URI and its operations are defined by the use of HTTP methods. 
 
 A RESTful API adopts many HTTP standards such as response codes and methods.
 
-<h3 id="2-1-2">2.1.2 Resource</h3>
+<h2 id="2-2">2.2 Resource</h2>
 
 In order to design a useful and clean API your system should be broken down into logical groupings (often called Models or Resources). In most cases the resources are the 'nouns' of your system.
 
@@ -273,7 +280,7 @@ In the example of an HR system, the resources would be things like `employees`, 
 
 By breaking systems down into these logical areas it allows a clean separation of concerns (eg employee functions only work on `employees` and only `employees` can apply for `leaverequests`). It also ensures that each piece of data that is returned from your API is the smallest that it needs to be to fulfil the client requirement (eg when asking for `employees` you don't also receive back `familymembers`).
 
-<h3 id="2-1-3">2.1.3 Resource identifier</h3>
+<h2 id="2-3">2.1.3 Resource identifier</h3>
 
 Every _resource_ that is available within your system (eg every `employee` or every `leaverequest`) must be identifiable uniquely within the system. This is a key element of the RESTful style of APIs; the ability to individually address any item within your system and store these identifiers for later use.
 
