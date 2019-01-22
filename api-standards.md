@@ -204,13 +204,13 @@ If there is no intention to reuse the API interface (i.e. point to point), then 
 
 #### Notes:
 
-- If your API falls into the System level API and is custom developed, it is **RECOMMENDED** that you use the standard as this will assist in developing Process or Experience level APIs if they are required in future.
+- If your API falls into the System level API and is custom developed, it's **RECOMMENDED** that you use the standard as this will assist in developing Process or Experience level APIs if they are required in future.
 
-- If your API is a Process Level API, it is **HIGHLY RECOMMENDED** that you apply the standard as more often than not, a process level API will be tailored for re-usability. 
+- If your API is a Process Level API, it's **HIGHLY RECOMMENDED** that you apply the standard as more often than not, a process level API will be tailored for re-usability. 
 
 - If your API is an Experience Level API, then the standards **MUST** be applied.
 
-This design guide itself does NOT apply to third-party System level APIs such as those available as ‘out-of-the-box’ or as part of SaaS platform (eg Salesforce APIs or ArcGIS APIs). However, the standard may apply if you were looking to re-expose these APIs as experience-level APIs for wider consumption.
+This design guide itself does NOT apply to third-party system-level APIs such as those available as ‘out-of-the-box’ or as part of a SaaS platform (eg Salesforce APIs or ArcGIS APIs). However, the standard may apply if you were looking to re-expose these APIs as experience-level APIs for wider consumption.
 
 <h2 id="1-4">1.4 Privacy and security</h2>
 
@@ -236,7 +236,7 @@ Note the types of data you'll be sharing and what protective markings are requir
 
 <h2 id="1-5">1.5 Sample Swagger definition</h2>
 
-We've provided a sample Swagger template to help API Designers get started. The template exposes API methods and conforms to the Victorian Government API design standards. Use this template as a basis for your API definition.
+We've provided a sample Swagger template to help API designers get started. The template exposes API methods and conforms to the Victorian Government API design standards. Use this template as a basis for your API definition.
 
 The template is available in [JSON format](api-example-swagger-v1.4.json). 
 
@@ -270,19 +270,21 @@ In the context of this Service Design Guide an API (Application Programming Inte
 
 A RESTful API is a style of communication between systems where resources are defined by URI and its operations are defined by the use of HTTP methods. 
 
-A RESTful API adopts many HTTP standards such as response codes and methods.
+A RESTful API adopts many HTTP standards, such as response codes and methods.
 
 <h2 id="2-2">2.2 Resource</h2>
 
-In order to design a useful and clean API your system should be broken down into logical groupings (often called Models or Resources). In most cases the resources are the 'nouns' of your system.
+In order to design a useful and clean API, your system should be broken down into logical groupings (often called Models or Resources). In most cases the resources are the 'nouns' of your system.
 
 In the example of an HR system, the resources would be things like `employees`, `positions` and `leaverequests`.
 
-By breaking systems down into these logical areas it allows a clean separation of concerns (eg employee functions only work on `employees` and only `employees` can apply for `leaverequests`). It also ensures that each piece of data that is returned from your API is the smallest that it needs to be to fulfil the client requirement (eg when asking for `employees` you don't also receive back `familymembers`).
+Breaking systems down into these logical areas allows a clean separation of concerns (eg employee functions only work on `employees` and only `employees` can apply for `leaverequests`). 
 
-<h2 id="2-3">2.1.3 Resource identifier</h3>
+It also ensures that each piece of data that is returned from your API is the smallest that it needs to be to fulfil the client requirement (eg when requesting `employees` you don't also receive back `familymembers`).
 
-Every _resource_ that is available within your system (eg every `employee` or every `leaverequest`) must be identifiable uniquely within the system. This is a key element of the RESTful style of APIs; the ability to individually address any item within your system and store these identifiers for later use.
+<h2 id="2-3">2.3 Resource identifier</h3>
+
+Every resource that is available in your system (eg every `employee` or `leaverequest`) must be identifiable uniquely within the system. This is a key element of the RESTful style of APIs - the ability to individually address any item within your system and store these identifiers for later use.
 
 Resource identifiers can be any of the following:
 
@@ -291,11 +293,11 @@ Name|Example|
 Numeric|`/employees/12389`
 String|`/employees/john-smith`
 GUID | `/employees/0d047d80-eb69-4665-9395-6df5a5e569a4`
-Date (Short form) | `/dates/2018-09-17`
+Date (short form) | `/dates/2018-09-17`
 
 As long as the identifier is unique within your application it can be any string of characters or numbers. It is RECOMMENDED that if numeric IDs are used, they are not sequential (eg it is not trivial to guess the next ID).
 
-<h3 id="2-1-4">2.1.4 Representation</h3>
+<h3 id="2-4">2.4 Representation</h3>
 
 A key concept in RESTful API design is the idea of the representation of a resource at any particular time.
 
@@ -320,9 +322,9 @@ Content-Type: application/json
 }
 ```
 
-The intent is this representation can change over time as the system and data within changes. A future call to this same endpoint may yield a different representation possibly if the employee is now on leave or their position within the organisation has changed.
+The intent is that this representation can change over time as the system and its data changes. A future call to this same endpoint may yield a different representation (eg if the employee is now on leave or their position within the organisation has changed).
 
-It is also possible to request an entirely different representation of this same resource if the system supports it. For example, there may be a case where you require a PDF version of this employee and this could be facilitated with a request for a different representation through the `Accept` header:
+It's also possible to request an entirely different representation of this same resource if the system supports it. For example, there may be a case where you require a PDF version of this employee and this could be facilitated with a request for a different representation through the `Accept` header:
 
 ```
 HTTP 1.1 GET /employees/john-smith
@@ -336,15 +338,15 @@ Content-Type: application/pdf
 
 More information about representations and how to support them is provided in the [Hypermedia](#11) section of this document.
 
-<h3 id="2-1-5">2.1.5 Namespace</h3>
+<h3 id="2-5">2.5 Namespace</h3>
 
 The namespace for a service defines the grouping of related functions within. Namespaces could be quite high level (eg an agency or department name) or quite low level (eg a project, team or service being exposed).
 
-Namespaces are useful when providing consumers access to related functions through gateway technologies. Once a consumer has an access token to a particular namespace it is likely (though not always required) that they will get access to all functions supplied within that namespace.
+Namespaces are useful when providing consumers with access to related functions through gateway technologies. Once a consumer has an access token to a particular namespace it's likely (though not always required) that they'll get access to all functions supplied within that namespace.
 
-To get a namespace allocated to your team or project please speak to the API Team [apiteam@dpc.vic.gov.au](mailto:apiteam@dpc.vic.gov.au).
+To get a namespace allocated to your team or project, email the API Team [apiteam@dpc.vic.gov.au](mailto:apiteam@dpc.vic.gov.au).
 
-<h3 id="2-1-6">2.1.6 Operation</h3>
+<h3 id="2-6">2.6 Operation</h3>
 
 To make use of any of the namespaces, resources and resource identifiers, developers must make use of Operations.
 
@@ -361,99 +363,97 @@ GET /employees/john-smith
 ```
 
 ______________________________________________________________________________
-<h1 id="3">3. WoVG API requirements</h1>
+<h1 id="3">3. Whole of Victorian Government API requirements</h1>
 <h2 id="3-1">3.1 API documentation</h2>
 
-Well-documented APIs are a critical component of a successful API programme. All APIs created for the Victorian government **MUST** specify a valid OpenAPI v2 document. 
+All APIs created for the Victorian government **MUST** specify a valid OpenAPI v2 document. 
 
-This assists with the interoperability of services through a common descriptive document. Where possible the structure, methods, naming conventions and responses will also be standardised to ensure a common experience for developers accessing services from a range of publishers.
+This assists with the interoperability of services through a common descriptive document. Where possible, the structure, methods, naming conventions and responses will also be standardised to ensure a common experience for developers accessing services from a range of publishers.
 
-The API description document is **RECOMMENDED** to contain the following sections:
+We **RECOMMEND** the API description document contains the following sections:
 
 - About
-- Legals
-  - Terms of Use
+- Legal
+  - Terms of use
   - License
-  - Data Classification
+  - Data classification
   - Copyright
   - Attribution
-- Authentication Requirements
-- Data Model
-- Contact Us
+- Authentication requirements
+- Data model
+- Contact us
 
-Agencies can engage the services of the DPC WoVG API Team to assist with authoring this document if required [apiteam@dpc.vic.gov.au](mailto:apiteam@dpc.vic.gov.au).
+Departments and agencies can engage the services of the API Team for help authoring their API documentation - email [apiteam@dpc.vic.gov.au](mailto:apiteam@dpc.vic.gov.au).
 
 <h2 id="3-2">3.2 API development</h2>
 
-The following guidelines are **RECOMMENDED** be followed when developing APIs:
+We **RECOMMEND** following these guidelineswhen developing APIs:
 
-- The API description documents **SHOULD** contain the API documentation (high level information and descriptions) and version controlled accordingly. 
+- The API description documents **SHOULD** contain the API documentation (high-level information and descriptions) and be version controlled accordingly.
   
 - They **MUST** be considered as technical contracts between designers and developers and between consumers and providers. 
   
-- Mock APIs **SHOULD** be created using the API description to allow early code integration for development
-  
-- The behaviour and intent of the API **SHOULD** be described with as much information as possible.
-  
-- The descriptions **SHOULD** contain example of request and responses
-  
-- Documentation **SHOULD** be public where possible and easily accessible to those that require it
-  
-- Example request and response bodies **SHOULD** be provided in full - not truncated
-  
-- Expected response codes and error messages **SHOULD** be provided in full
-  
-- Correct response codes **SHOULD** be used (ref: [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes))
-  
-- Known issues or limitations **SHOULD** be clearly documented
-  
-- Expected performance, uptime and SLA/OLA **SHOULD** be clearly documented
-  
-- If known, a timeline when methods will be deprecated **SHOULD** be provided
-  
-- Documentations **SHOULD** be printable or exportable
+- Ensure documentation is publicly available and easily accessible.
 
+- Documentation **SHOULD** be printable or exportable.
+
+- Describe the behaviour and intent of the API with as much information as possible.
+  
+- Create mock APIs using the API description to allow early code integration for development.
+ 
+- Include full examples of requests and responses in the description documents (not truncated).
+  
+- Provide full expected response codes and error messages.
+  
+- Use correct response codes (ref: [Wikipedia](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes))
+  
+- Clearly document known issues or limitations.
+  
+- Clearly document expected performance, uptime and SLA/OLA.
+  
+- Provide a timeline for proposed deprecation of methods (if known).
+  
 #### Packaging
 
 The Swagger description files must be available:
 
 - **Online** : Serve as part of the product API under `/<namespace>/<project>/v<x>/api-docs`
-- **Offline** : As part of the product packaging.
+- **Offline** : As part of the product packaging
 
-#### File Format
+#### File format
 
-The required file format for the API Description is JSON since its most widely supported.
+The required file format for the API Description is JSON since it's the most widely supported.
 
 #### Versioning
 
-In order to follow the versioning recommendations in this standard there must be one Swagger description per major version.
+There must be one Swagger description per major version, as per the versioning recommendations in this standard.
 
-For example, if your API product exposes and maintains 3 major versions of its REST API then you must provide 3 Swagger descriptions (one for each version: v1, v2 and v3).
+For example, if your API product exposes and maintains 3 major versions of its REST API, then you must provide 3 Swagger descriptions (one for each version: v1, v2 and v3).
 
 <h2 id="3-3">3.3 API developer experience and ease of use</h2>
 
-An API that is difficult to use reduces the likelihood that consumers will continue to use it and will therefore seek alternatives. They will also be unlikely to recommend the API to others.
+APIs should be user friendly so users will be happy to use and recommend them to others.
 
-APIs that are being designed are **RECOMMENDED** to be tested with real consumers. Any feedback provided **SHOULD** be considered for incorporation into the API to ensure the best possible outcome.
+We **RECOMMEND** all APIs are tested with real consumers during development. Feedback and insights **SHOULD** be considered for incorporation into the API to ensure the best possible outcome.
 
-The WoVG API Team provides an API review process to ensure APIs meet a baseline level of usability prior to them being published to potential consumers for feedback.
+Make use of the API Team's review process to ensure your API meets a baseline level of usability before publishing it for user feedback.
 
 <h2 id="3-4">3.4 API stability</h2>
 
-APIs **MUST** be designed with backwards compatibility in mind as when changes are introduced it is not likely that consumers will introduce these into their applications immediately.
+APIs **MUST** be designed with backwards compatibility in mind. Consumers don't always incorporate new changes into their application immediately.
 
-In most cases introducing new fields to an API or adding new endpoints is a non-breaking change and can be introduced with a patch version update.
+In most cases, introducing new fields to an API or adding new endpoints is a non-breaking change and can be introduced with a patch version update.
 
-Should the API contract need to change in a manner that breaks the consumers contract this **SHOULD** be communicated clearly.
+If you need to change the API contract in a way that breaks the consumers contract, you **SHOULD** communicate this clearly.
 
-  1. API Product owners **SHOULD** document the support lifespan for API services (eg how long they will be supported).
+  1. API product owners **SHOULD** document the support life span for API services (ie how long they will be supported).
   2. New functionality **MUST** be introduced in a way that does not impact existing consumers.
   3. Any deprecation activities **MUST** be known to consumers prior to them being put into effect.
 
 ______________________________________________________________________________
 <h1 id="4">4. Naming conventions</h1>
 <h2 id="4-1">4.1 Message format</h2>
-For request and response body and query parameter names the message format is **RECOMMENDED** to use snake case.
+We **RECOMMEND** the use of snake case for request and response body and query parameter names.
 
 #### Example:
 
@@ -465,7 +465,7 @@ For request and response body and query parameter names the message format is **
 }
 ```
 
-If snake case is not available, it is then **RECOMMENDED** to use camel case.
+If snake case is not available, use camel case.
 
 #### Example:
 
@@ -481,13 +481,11 @@ In either case the object and field definition must be the same for the request 
 
 <h2 id="4-2">4.2 URI component names</h2>
 
-URIs follow [RFC 3986](https://tools.ietf.org/html/rfc3986) specification. This specification simplifies REST API service development and consumption. 
-
-The guidelines in this section govern your URI structure and semantics following the [RFC 3986](https://tools.ietf.org/html/rfc3986) constraints.
+Your URI structure and semantics should follow the [RFC 3986](https://tools.ietf.org/html/rfc3986) specification and constraints. This specification simplifies REST API service development and consumption. 
 
 <h3 id="4-2-1">4.2.1 URI components</h3>
 
-The structure of the URLs used within APIs **SHOULD** be meaningful to the consumers. URLs **SHOULD** follow a predictable, hierarchical structure to enhance understandability and therefore usability. 
+The structure of URLs used within APIs **SHOULD** be meaningful to the consumers. URLs **SHOULD** follow a predictable, hierarchical structure to enhance usability. 
 
 URLs **MUST** follow the standard naming convention as described below:
 
@@ -500,29 +498,29 @@ URLs **MUST** follow the standard naming convention as described below:
 
 <h3 id="4-2-2">4.2.2 URI naming conventions</h3>
 
-URLs **MUST** follow the standard naming convention as described below:
+URLs **MUST** follow the standard naming conventions:
 - the URI **MUST** be specified in all lower case
-- only hyphens '-' can be used to separate words or path parameters for readability (no spaces or underscores)
-- only underscores '\_' can be used to separate words in query parameter names but not as part of the base URI
+- only use hyphens '-' to separate words or path parameters (no spaces or underscores) for readability
+- only use underscores '\_' to separate words in query parameter names
 
-The following table provides a breakdown of how to construct the API URI.
+####How to construct your API URI
 
 | URI element | Description | Example |
 | --- | --- | --- |
 | Protocol | All APIs **MUST** be exposed using HTTPS. | `https:// `|
-| Authority \> Environment | The domain of where the API endpoint will be exposed. Refer to the 'DNS' standard section for details. | `gw.api.vic.gov.au` |
-| Path \> API | The API name which is derived from the business domain. | eg: `/namespace/project-name` <br />Any agency/department can specify the API name that they would like to expose their services on. |
-| Path \> Version | The version of the API that is desired to be accessed by the consumer. | eg: `/v1` <br/> All APIs must specify a version that follow the versioning scheme as specified in 'versioning' below. |
-| Path \> Collection | The collection identifies a list of resources. The collection **MUST** be named using the **plural** representation of a noun. | eg: As part of the workforce API - a resource could be a list of `employees`. |
+| Authority \> Environment | The domain of the site where the API endpoint will be exposed. Refer to the 'DNS' standard section for details. | `gw.api.vic.gov.au` |
+| Path \> API | The API name which is derived from the business domain. | eg: `/namespace/project-name` <br />Any department or agency can specify the API name that they want to expose their services on. |
+| Path \> Version | The version of the API that is desired to be accessed by the consumer. | eg: `/v1` <br/> All APIs must specify a version that follows the versioning scheme as specified in 'versioning' below. |
+| Path \> Collection | The collection identifies a list of resources. The collection **MUST** use the **plural** representation of a noun. | eg: As part of the workforce API example, a resource could be a list of `employees`. |
 | Path \> Resource | The resource identifier which corresponds to an instance of the resource. | eg: As part of the **project-name** API - if there was a specific employee with id E13454. <br />These details can be retrieved using `GET` `/project-name/v1/employees/E13455` |
-| Query String \> Parameters/Filters | Query parameters **MUST** NOT be used to transport payload or actual data. <br/><br/>The following query parameters **SHOULD** be supported by your API where they would be useful:<br/><br/>**attributes** - specify or restrict the attributes to be returned<br/><br/>**filters** – conditions to restrict/filter the collection list<br/><br/>**sort** – specify the sort requirement<br/><br/>**page** – specify which pagination index to be return in a collection set | eg: `attributes=first_name,last_name` <br /> returns data element with only the `first_name` and `last_name` attributes<br/><br/>`filters=creation_date => 2001-09-20T13:00:00 and creation_date <= 2001-09-21T13:00:00 and first_name like 'fred' and post_code=3000` - return a collection of resources where the creation date is between 2001-09-20 1pm and 2001-09-21 1pm and first-name like 'fred' and post_code is 3000.<br/><br/>`sort=date_of_birth desc` - return a collection where the resources are sorted by date_of_birth in descending order.<br/><br/>`page=10` – returns the 10th page index
+| Query string \> Parameters/Filters | Query parameters **MUST NOT** be used to transport payload or actual data. <br/><br/>The following query parameters **SHOULD** be supported by your API where they would be useful:<br/><br/>**attributes** - specify or restrict the attributes to be returned<br/><br/>**filters** – conditions to restrict or filter the collection list<br/><br/>**sort** – specify the sort requirement<br/><br/>**page** – specify which pagination index to be return in a collection set | eg: `attributes=first_name,last_name` <br /> – returns a data element with only the `first_name` and `last_name` attributes<br/><br/>`filters=creation_date => 2001-09-20T13:00:00 and creation_date <= 2001-09-21T13:00:00 and first_name like 'fred' and post_code=3000` – return a collection of resources where the creation date is between 2001-09-20 1pm and 2001-09-21 1pm and first-name like 'fred' and post_code is 3000.<br/><br/>`sort=date_of_birth desc` – returns a collection where the resources are sorted by date_of_birth in descending order.<br/><br/>`page=10` – returns the 10th page index
 
 <h3 id="4-2-3">4.2.3 Resource names</h3>
 
-API Designers **MUST** follow these principles when creating a REST API:
-- Nouns **MUST** be used - not verbs for names.
-- Resource names **MUST** be singular for singletons; collections' names **MUST** be plural.
-- Resource names **MUST** be lower-case and use only alphabetic characters and hyphens.
+API designers **MUST** follow these principles when creating a REST API:
+- Nouns **MUST** be used (not verbs) for resource names.
+- Resource names **MUST** be singular for singletons and plural for names of collections.
+- Resource names **MUST** be lower case and use only alpha characters and hyphens.
 - The hyphen character ( - ), MUST be used as a word separator in URI path parameters. 
 
 **Note** that this is the only place where hyphens are used as a word separator. In nearly all other situations the underscore character ( _ ), **MUST** be used.
@@ -531,7 +529,7 @@ API Designers **MUST** follow these principles when creating a REST API:
 
 - Literals/expressions in query strings **SHOULD** be separated using underscore ( _ ).
 - Query parameters values **MUST** be percent-encoded.
-- Query parameters **MUST** start with a letter and **SHOULD** be all in lower case. Only alpha characters, digits and the underscore ( _ ) character **SHALL** be used.
+- Query parameters **MUST** start with a letter and **SHOULD** be all in lower case. Only use alpha characters, numerals and the underscore ( _ ) character.
 - Query parameters **SHOULD** be optional.
 - Query parameters **SHOULD** not contain characters that are not URL safe.
 
@@ -539,24 +537,24 @@ API Designers **MUST** follow these principles when creating a REST API:
 
 The data model for the representation **MUST** conform to the `JSON` specification. 
 
-The values may themselves be objects, strings, numbers, booleans, or arrays of objects.
+The values may themselves be objects, strings, numbers, booleans or arrays of objects.
 
-- Key names MUST be lower-case words, separated by an underscore character ( _ ).
+- Key names MUST be lower-case words, separated by an underscore character ( _ ):
    - `foo`
    - `bar_baz`
 - Prefix such as `is_` or `has_` **SHOULD NOT** be used for keys of type boolean.
-- Fields that represent arrays **SHOULD** be named using plural nouns (eg authenticators - contains one or more authenticators, products - contains one or more products).
+- Fields that represent arrays **SHOULD** be named using plural nouns (eg `authenticators` contains one or more authenticator, `products` contains one or more product).
 
 <h2 id="4-4">4.4 Link relation names</h2>
 
-To help guide users through your API, relational links **MUST** be provided. These links act as the navigation of your API advising users of where they can go to next.
+To help guide users through your API, relational links **MUST** be provided. These help users navigate through your API.
 
-A `links` array **MUST** be provided for resources. This contains link objects that can refer to related resources in the system.
+A links array **MUST** be provided for resources. This contains link objects that can refer to related resources in the system.
 
 A link relation **MUST** contain the following elements:
 - href - string containing the absolute or relative URL to the resource
 - rel - the textual string describing what this entity is
-- method - the HTTP method that **SHOULD** be used when using this related resource.
+- method - the HTTP method that should be used when using this related resource.
 
 #### Example:
 
@@ -570,20 +568,20 @@ A link relation **MUST** contain the following elements:
 ]
 ```
 
-<h2 id="4-5">4.5 Request headers</h2>
+<h2 id="4-5">4.5 Request header</h2>
 
-The following headers **SHOULD** be assumed by default on all requests.
+The following header **SHOULD** be assumed by default on all requests.
 
 |Header | Default value|
 |---|---|
 |Accept|`application/json`|
 
-<h2 id="4-6">4.6 Examples</h2>
+<h2 id="4-6">4.6 URL examples</h2>
 <h3 id="4-6-1">4.6.1 Examples of good URLs</h3>
 
 List of employees:<br />
   `GET` https://gw.api.vic.gov.au/e09284/v1/employees<br />
-Filtering is a query:<br />
+Filtering in a query:<br />
   `GET` https://gw.api.vic.gov.au/e09284/v1/employees?year=2011&sort=desc<br />
   `GET` https://gw.api.vic.gov.au/e09284/v1/employees?section=economy&year=2011<br />
 A single employee in JSON format:<br />
@@ -609,7 +607,7 @@ Filtering outside in the URL instead of the query string<br />
   https://gw.api.vic.gov.au/e09284/v1/employee/1234/desc<br />
 
 ______________________________________________________________________________
-<h1 id="5">5. API Versioning</h1>
+<h1 id="5">5. API versioning</h1>
 <h2 id="5-1">5.1 Versioning scheme</h2>
 
 All APIs **MUST** adhere to [semantic versioning](https://semver.org/):
@@ -632,20 +630,20 @@ The minor and patch version numbering is NOT required in the URI as the changes 
 
 <h3 id="5-2-1">5.2.1 Minimise new major versions</h3>
 
-With each new major version of the API, the older versions are required until all the consumers are uplifted to use the new versions. This adds to the overall maintenance and support requirements.
+With each new major version of the API, the older versions are required until all the consumers are uplifted to use the new versions. This adds to the API's overall maintenance and support requirements.
 
 Use API keys to identify consumers and decommission older version(s) of the API with sufficient notification.
 
-When new major versions are published the older version must be deprecated following the deprecation process in [5.7](#5-7)
+When new major versions are published, the older version must be deprecated following the API deprecation process in [5.7](#5-7)
 
 <h2 id="5-3">5.3 Minor version</h2>
 
-Minor version numbers are displayed on the API documentation page or part of a special management call to the API URI itself. To support this your API **MUST** implement a response to a GET request to the base URI of the API and return the following metadata in the response:
+Minor version numbers are displayed on the API documentation page or as part of a special management call to the API URI itself. To support this your API **MUST** implement a response to a GET request to the base URI of the API and return the following metadata in the response:
 - **api_name:** The API name
 - **api_version:** The API version with major and minor versions
 - **api_released:** The date the API was released
 - **api_documentation:** Links to the API documentation
-- **api_status:** To indicate whether an API is still active or has been deprecated
+- **api_status:** Indicate whether an API is still active or has been deprecated
 
 Additional metadata can be added to the response if required.
 
@@ -668,21 +666,21 @@ GET /namespace/v1/
 
 <h2 id="5-4">5.4 Minor and patch documentation</h2>
 
-The Swagger definition **SHOULD** also contain the minor and patch version.
+Include the minor and patch version numbering in the Swagger definition.
 
 API product version and API implementation version are **NOT** the same. 
 
-A product version is the logical version that is applied to the API for documentation and reference purpose. The implementation version is the physical build version that was created.
+A product version is the logical version that is applied to the API for documentation and reference purposes. The implementation version is the physical build version that was created.
+
+Any patch updates (patch or service pack) **MUST** have backward compatibility.
 
 #### Example:
 
-| Product version | API implementation version | Change Type | Version Change |
+| Product version | API implementation version | Change type | Version change |
 | --- | --- | --- | --- |
-| 17.04.xx | 1.29.xx | Bug Fixes | Product version will be changed to **17.04.02** if changes are related to product. API implementation version will be changed to **1.29.02** if changes are related to API |
-| 17.04.xx | 1.29.xx | Backward Compatible | Product version will be changed to **17.05.xx** if changes are related to product. API implementation version will be changed to **1.30.x** if changes are related to API |
-| 17.04.xx | 1.29.xx | Non-Backward Compatible | Product version will be changed to **18.01.x** if changes are related to product. API implementation version will be changed to **2.00.x** if changes are related to API |
-
-A patch update (patch or service pack) **MUST** have backward compatibility.
+| 17.04.xx | 1.29.xx | Bug fixes | The product version will be changed to **17.04.02** if the changes are related to the product.<br/>The API implementation version will be changed to **1.29.02** if the changes are related to the API. |
+| 17.04.xx | 1.29.xx | Backward compatible | The product version will be changed to **17.05.xx** if the changes are related to the product.<br/>The API implementation version will be changed to **1.30.x** if the changes are related to the API. |
+| 17.04.xx | 1.29.xx | Non-backward compatible | The product version will be changed to **18.01.x** if the changes are related to the product.<br/>The API implementation version will be changed to **2.00.x** if the changes are related to the API. |
 
 <h2 id="5-5">5.5 Backwards compatibility</h2>
 
@@ -702,15 +700,15 @@ The following changes are **NOT** deemed to be backwards compatible:
 - Removal of endpoints or functions
 - Removal of media type support
 
-Any of these changes **MUST** require a major version update so these should be managed with caution.
+Any of these changes requires a major version update. These should be managed with caution.
 
 <h2 id="5-6">5.6 End-of-life policy</h2>
 
 When designing new APIs, one of the most important dates to consider is when the API will be retired.
 
-APIs are not intended to last forever. Some APIs are retired after a short time as they may be proving a use-case, others may be removed when better options are available for users.
+APIs are not intended to last forever. Some APIs are retired after a short time as they may be created to prove a use-case. Others may be removed when better options are available.
 
-The End-of-life (EOL) policy determines the process that APIs go through to move through their workflow from `LIVE` to the `RETIRED` state. 
+The ond-of-life (EOL) policy determines the process that APIs go through to move through their workflow from `LIVE` to the `RETIRED` state. 
 
 The EOL policy is designed to ensure a consistent and reasonable transition period for API customers who need to migrate from the old API version to the new API version while enabling a healthy process to retire technical debt.
 
