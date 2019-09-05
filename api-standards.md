@@ -260,6 +260,7 @@ It is important to note the types of data you will be sharing and what protectiv
 
 <br /><br />
 <h2 id="1-5">1.5 Sample Swagger Definition</h2>
+
 A sample Swagger template that exposes APIs methods and conforms to the Service Design Guide is provided here to help API Designers get started.
 
 The template is available in [JSON format](api-example-swagger-v1.4.json). 
@@ -298,6 +299,7 @@ ______________________________________________________________________________
 
 
 <h3 id="2-1-1">2.1.1 API</h3>
+
 In the context of this Service Design Guide an API (Application Programming Interface) is defined as a RESTful API.  
 
 A RESTful API is a style of communication between systems where resources are defined by URI and its operations are defined by the use of HTTP methods. 
@@ -329,7 +331,7 @@ GUID | `/employees/0d047d80-eb69-4665-9395-6df5a5e569a4`
 Date (Short form) | `/dates/2018-09-17`
 
 
-As long as the identifier is unique within your application it can be any string of characters or numbers.  It is RECOMMENDED that if numeric IDs are used that they are not sequential e.g. it is not trivial to guess the next ID.
+As long as the identifier is unique within your application it can be any string of characters or numbers.  It is **RECOMMENDED** that if numeric IDs are used that they are not sequential e.g. it is not trivial to guess the next ID.
 
 
 
@@ -469,7 +471,7 @@ The Swagger description files must be available:
 
 #### File Format
 
-The required file format for the API Description is JSON since its most widely supported.
+The required file format for the API Description is JSON since it is widely supported.
 
 #### Versioning
 
@@ -685,6 +687,7 @@ Add a new location to a particular employee:<br />
 
 <br /><br />
 <h3 id="4-6-2">4.6.2 Bad URL examples</h3>
+
 Non-plural endpoint:<br />
 
   https://gw.api.vic.gov.au/e09284/v1/employee<br />
@@ -1065,6 +1068,7 @@ The following parameters are also common across REST APIs but are not to be used
 
 <br /><br />
 <h3 id="7-1-2">7.1.2 Metadata</h3>
+
 When pagination is included it is **RECOMMENDED** for APIs to advise the user in the response body what page they are on.  If not included the user is forced to inspect the request often requiring unnecessary code to parse query parameters.
 
 An example of this is as follows:
