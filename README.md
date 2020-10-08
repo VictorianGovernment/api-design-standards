@@ -2,7 +2,7 @@
 
 The Victorian Government API Design standards have been superseded by the Australian National API Design Standards (NAPIDS) which are available at https://api.gov.au/standards/.
 
-The standards promote consistency and interoperability in the development of APIs and guide users through the full API lifecycle including design, development, build, and management.
+The standards promote consistency and interoperability in the development of APIs and guide users through the full API lifecycle including design, development, build and management.
 
 We welcome contributions to the development of the NAPIDS through the Community of Practice, and through a dedicated GitHub community at https://github.com/apigovau/api-gov-au.
 
