@@ -408,7 +408,7 @@ ______________________________________________________________________________
 <h1 id="3">3. WoVG API Requirements</h1>
 <h3 id="3-1">3.1 API Documentation</h3>
 
-Well documented APIs are a critical component of a successful API programme. All APIs created for the Victorian government **MUST** specify a valid OpenAPI v2 document. 
+Well documented APIs are a critical component of a successful API programme. All APIs created for the Victorian government **MUST** specify a valid OpenAPI document (latest stable version preferred). 
 
 This assists with the interoperability of services through a common descriptive document.  Where possible the structure, methods, naming conventions and responses will also be standardised to ensure a common experience for developers accessing services from a range of publishers.
 
@@ -2085,7 +2085,7 @@ ______________________________________________________________________________
 
 
 ## API STANDARDS REFERENCED
-> [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md)
+> [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/)
 > [White House Web API Standards](https://github.com/WhiteHouse/api-standards)
 > [18F API Standards](https://github.com/18F/api-standards)
 > [Gov.UK API Service Manual](https://www.gov.uk/service-manual/technology/application-programming-interfaces-apis)
